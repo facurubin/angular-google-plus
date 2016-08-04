@@ -9,6 +9,8 @@ angular.module("googleplus", []).provider("GooglePlus", [ function() {
      * @type {Object}
      */
     var a = {};
+    
+    a.prompt = null;
     /**
      * clientId
      * @type {Number}
@@ -85,6 +87,7 @@ angular.module("googleplus", []).provider("GooglePlus", [ function() {
             var c = {
                 client_id: a.clientId,
                 scope: a.scopes,
+                prompt: a.prompt,
                 immediate: false
             };
             if (a.accessType && a.responseType) {
