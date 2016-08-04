@@ -15,6 +15,7 @@ angular.module("googleplus", []).provider("GooglePlus", [ function() {
      */
     a.clientId = null;
     a.prompt = null;
+    a.authuser = 0;
     this.setClientId = function(b) {
         a.clientId = b;
         return this;
@@ -90,7 +91,7 @@ angular.module("googleplus", []).provider("GooglePlus", [ function() {
                 client_id: a.clientId,
                 scope: a.scopes,
                 prompt: a.prompt,
-                immediate: false
+                authuser: a.authuser
             };
             angular.extend(d, c);
             if (a.accessType && a.responseType) {

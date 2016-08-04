@@ -22,6 +22,7 @@ angular.module('googleplus', []).
      */
     options.clientId = null;
     options.prompt = null;
+    options.authuser = 0;
 
     this.setClientId = function(clientId) {
       options.clientId = clientId;
@@ -114,7 +115,7 @@ angular.module('googleplus', []).
           client_id: options.clientId,
           scope: options.scopes,
           prompt: options.prompt,
-          immediate: false
+          authuser: options.authuser
         };
 
         angular.extend(authOptions, opts);
