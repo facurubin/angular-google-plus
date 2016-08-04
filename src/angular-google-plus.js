@@ -21,6 +21,8 @@ angular.module('googleplus', []).
      * @type {Number}
      */
     options.clientId = null;
+    options.prompt = null;
+    options.authuser = 0;
 
     this.setClientId = function(clientId) {
       options.clientId = clientId;
@@ -102,14 +104,21 @@ angular.module('googleplus', []).
        */
       var NgGooglePlus = function () {};
 
-      NgGooglePlus.prototype.login =  function () {
+      NgGooglePlus.prototype.login =  function (opts) {
         deferred  = $q.defer();
+
+        if(opts === undefined){
+          opts = {};
+        }
 
         var authOptions = {
           client_id: options.clientId,
           scope: options.scopes,
-          immediate: false
+          prompt: options.prompt,
+          authuser: options.authuser
         };
+
+        angular.extend(authOptions, opts);
 
         if(options.accessType && options.responseType) {
           authOptions.access_type = options.accessType;

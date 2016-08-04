@@ -1,4 +1,4 @@
-/*! angular-google-plus - v0.1.3 2015-08-27 */
+/*! angular-google-plus - v0.1.3 2016-08-04 */
 /**
  * googleplus module
  */
@@ -9,14 +9,13 @@ angular.module("googleplus", []).provider("GooglePlus", [ function() {
      * @type {Object}
      */
     var a = {};
-    
-    a.prompt = null;
-    a.authuser = 0;
     /**
      * clientId
      * @type {Number}
      */
     a.clientId = null;
+    a.prompt = null;
+    a.authuser = 0;
     this.setClientId = function(b) {
         a.clientId = b;
         return this;
@@ -83,19 +82,23 @@ angular.module("googleplus", []).provider("GooglePlus", [ function() {
        * @type {Class}
        */
         var f = function() {};
-        f.prototype.login = function() {
+        f.prototype.login = function(c) {
             e = b.defer();
-            var c = {
+            if (c === undefined) {
+                c = {};
+            }
+            var d = {
                 client_id: a.clientId,
                 scope: a.scopes,
                 prompt: a.prompt,
                 authuser: a.authuser
             };
+            angular.extend(d, c);
             if (a.accessType && a.responseType) {
-                c.access_type = a.accessType;
-                c.response_type = a.responseType;
+                d.access_type = a.accessType;
+                d.response_type = a.responseType;
             }
-            gapi.auth.authorize(c, this.handleAuthResult);
+            gapi.auth.authorize(d, this.handleAuthResult);
             return e.promise;
         };
         f.prototype.checkAuth = function() {
