@@ -102,14 +102,20 @@ angular.module('googleplus', []).
        */
       var NgGooglePlus = function () {};
 
-      NgGooglePlus.prototype.login =  function () {
+      NgGooglePlus.prototype.login =  function (customOptions) {
         deferred  = $q.defer();
+
+        if(customOptions === undefined){
+          customOptions = {};
+        }
 
         var authOptions = {
           client_id: options.clientId,
           scope: options.scopes,
           immediate: false
         };
+
+        angular.extend(authOptions, customOptions);
 
         if(options.accessType && options.responseType) {
           authOptions.access_type = options.accessType;
