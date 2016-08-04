@@ -21,6 +21,9 @@ angular.module('googleplus', []).
      * @type {Number}
      */
     options.clientId = null;
+    options.prompt = undefined;
+    options.authuser = 0;
+    options.immediate = false;
 
     this.setClientId = function(clientId) {
       options.clientId = clientId;
@@ -112,11 +115,17 @@ angular.module('googleplus', []).
         var authOptions = {
           client_id: options.clientId,
           scope: options.scopes,
-          immediate: false
+          immediate: options.immediate,
+          authuser: options.authuser,
+          prompt: options.prompt
         };
 
         angular.extend(authOptions, customOptions);
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         if(options.accessType && options.responseType) {
           authOptions.access_type = options.accessType;
           authOptions.response_type = options.responseType;
